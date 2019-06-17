@@ -5,60 +5,62 @@
 <!DOCTYPE html>
 <html>
 <head><title>list</title> </head>
-<script type="text/javascript" >
-function showPrompt(){
-	  var result = prompt("何か入力してください。", "hoge");
-	 
-	  if(result == null){
-	  confirm("キャンセルされました。");
-	  }else{
-	    confirm("入力された文字は「" + result + "」です。");
-	  }
-	}
-function Check() {
-	$.ajax({
-		type:"POST",
-		url:"../ListServlet",
-		data:{
-			name:$("#create").val(), 
-		},
-		dataType:"text",//类型
-		beforeSend:function(XMLHttpRequest){
-			$("#show").text("loading..");
-		},
-		success:function(data,textStatus){//data代表servlet返回的数据，随意命名，一般写msg
-			$("#show").text(data);//给id为show的div显示返回的text
-			$("#show").css("color","red");
-		},
-	});
-}
 
-</script>
+
+
 <body>
 <form method="post" action="CreateServlet">
 <!-- <input type="button" value="create" id="create" name="create" onclick="showPrompt();"> -->
 <input type="text" name="name">
 <input type="submit" value="set">
-<input type="button" value="create" id="create" name="create" onclick="showPrompt();">
 </form>
+
+
+<script language="JavaScript" type="text/javascript">
+function AllChecked(){
+	var allFrom =  document.forms["deleteName"].all;
+	var all =allFrom.checked;
+	 for (var i=0; i<document.forms["deleteName"].hoge.length; i++){
+		 document.forms["deleteName"].hoge[i].checked = all;
+	    }
+}
+function DisChecked(){
+    var checks = document.forms["deleteName"].hoge;
+    var checksCount = 0;
+    for (var i=0; i<checks.length; i++){
+      if(checks[i].checked == false){
+    	  document.forms["deleteName"].all.checked = false;
+      }else{
+        checksCount += 1;
+        if(checksCount == checks.length){
+        	document.forms["deleteName"].all.checked = true;
+        }
+      }
+    }
+  }
+</script>
+<form method="post" action="DeleteServlet" name="deleteName">
+<input type="submit" value="delete"  >
 <table>
 <tr>
+	<th><input type="checkbox" name="all" onClick="AllChecked();" /></th>
 	<th>id</th>
 	<th>name</th>
 	<th>created</th>
 	<th>modified</th>
 </tr>
 
-<c:forEach var="article" items="${articles }">
+<c:forEach var="article" items="${articles}">
+
 <tr>
+    <td><input type="checkbox" name="hoge" value="${article.id}"></td>
 	<td>${article.id}</td>
 	<td>${article.name}</td>
 	<td>${article.created}</td>
 	<td>${article.modified}</td>
 </tr>
 </c:forEach>
-
-
 </table>
+</form>
 </body>
 </html>

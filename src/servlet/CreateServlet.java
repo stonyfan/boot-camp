@@ -1,14 +1,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -18,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.DBConfigFile;
-import model.list;
 import service.MyDBAccess;
 
 /**
@@ -45,39 +37,16 @@ public class CreateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doPost(request, response);
-		///get db(config) path
-		ServletContext context= this.getServletContext();
-		String path = context.getRealPath("/WEB-INF/db.properties");
+		ServletContext sce = getServletContext();
+		DBConfigFile dbProperties = (DBConfigFile) sce.getAttribute("dbProperties");
 		
-		//get db(config) value 
-		DBConfigFile dbP =new DBConfigFile();
-		dbP.getDbProperties(path);
-		
-		// connect to DB by db(config) value   
-		MyDBAccess db = new MyDBAccess(dbP.getDriver(),dbP.getUrl(),dbP.getUser(),dbP.getPassword());
+		MyDBAccess db = new MyDBAccess(dbProperties.getDriver(),
+										dbProperties.getUrl(),
+										dbProperties.getUser(),
+										dbProperties.getPassword());
 		String nameCreate = request.getParameter("name");
-		String nameC = request.getParameter("create");
-		System.out.println(nameC);
-	    try {
-	    	List<list> list= new ArrayList<list>();
-			db.open();
-			Connection conn=db.getConnections();
-			String sql = "insert into sample (name,created,modified) values (?,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)";
-			//
-			PreparedStatement stmt = conn.prepareStatement(sql);
-			Timestamp current = new Timestamp(System.currentTimeMillis());
-			stmt.setString(1, nameCreate);
-
-			stmt.executeUpdate();
-
-			db.close();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	    
+		db.createData(nameCreate);
+		
 	    String a ="ListServlet";
 	    response.sendRedirect(a);
 	}

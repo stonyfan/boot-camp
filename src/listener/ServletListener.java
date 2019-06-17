@@ -1,17 +1,12 @@
 package listener;
 
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 import model.DBConfigFile;
-import model.list;
-import service.MyDBAccess;
+
 
 /**
  * Application Lifecycle Listener implementation class ServletListener
