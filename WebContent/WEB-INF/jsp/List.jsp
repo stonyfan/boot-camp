@@ -4,16 +4,15 @@
 
 <!DOCTYPE html>
 <html>
-<head><title>list</title> </head>
+<head>
+<title>list</title> 
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
 
 
 
 <body>
-<form method="post" action="CreateServlet">
-<!-- <input type="button" value="create" id="create" name="create" onclick="showPrompt();"> -->
-<input type="text" name="name">
-<input type="submit" value="set">
-</form>
 
 
 <script language="JavaScript" type="text/javascript">
@@ -38,10 +37,69 @@ function DisChecked(){
       }
     }
   }
+  
+	function modifyData(){
+	  document.getElementById('list').action="ModifyServlet";
+  }
+	
+	function createData(){
+	document.getElementById('list').action="CreateServlet";
+  }
+	
+	function deleteData(){
+	  document.getElementById('list').action="DeleteServlet";
+}
 </script>
-<form method="post" action="DeleteServlet" name="deleteName">
-<input type="submit" value="delete"  >
+
+
+
+
+<form method="post" id="list" >
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- action="DeleteServlet" name="deleteName" -->
+
+<input type="text" name="name" value="set new document" >
+<input type="submit" value="set" onclick="createData();">
+
+<input type="text" name="modify" value="modify" >
+<input type="submit" value="modify" onclick="modifyData();">
+
+<input type="submit" value="delete" onclick="deleteData();" >
+
 <table>
+<tr></tr>
+
 <tr>
 	<th><input type="checkbox" name="all" onClick="AllChecked();" /></th>
 	<th>id</th>

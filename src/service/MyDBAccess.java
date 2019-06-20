@@ -114,5 +114,19 @@ public class MyDBAccess {
 			e.printStackTrace();
 		}
    }
+   
+   public void modifyData(String name,int id) {
+	   try {
+			open();			
+			String sql = "update sample set name=?,modified=CURRENT_TIMESTAMP where id=?";
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			stmt.setString(1, name);
+			stmt.setInt(2, id);
+			stmt.executeUpdate();
+		close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+   }
 }
 
