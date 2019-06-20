@@ -1,47 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
 
+%>
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <title>list</title> 
-<!-- bootstrap -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+
+<!-- jQuery Modal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 </head>
 
 
 
 <body>
-
-
-<script language="JavaScript" type="text/javascript">
+<script  type="text/javascript">
 function AllChecked(){
-	var allFrom =  document.forms["deleteName"].all;
+	var allFrom =  document.forms["list"].all;
 	var all =allFrom.checked;
-	 for (var i=0; i<document.forms["deleteName"].hoge.length; i++){
-		 document.forms["deleteName"].hoge[i].checked = all;
+	 for (var i=0; i<document.forms["list"].hoge.length; i++){
+		 document.forms["list"].hoge[i].checked = all;
 	    }
 }
 function DisChecked(){
-    var checks = document.forms["deleteName"].hoge;
+    var checks = document.forms["list"].hoge;
     var checksCount = 0;
     for (var i=0; i<checks.length; i++){
       if(checks[i].checked == false){
-    	  document.forms["deleteName"].all.checked = false;
+    	  document.forms["list"].all.checked = false;
       }else{
         checksCount += 1;
         if(checksCount == checks.length){
-        	document.forms["deleteName"].all.checked = true;
+        	document.forms["list"].all.checked = true;
         }
       }
     }
   }
-  
+  /*
 	function modifyData(){
 	  document.getElementById('list').action="ModifyServlet";
   }
-	
+	*/
 	function createData(){
 	document.getElementById('list').action="CreateServlet";
   }
@@ -53,49 +57,16 @@ function DisChecked(){
 
 
 
-
-<form method="post" id="list" >
-
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-
+<form method="post" id="list" name="list">
 <!-- action="DeleteServlet" name="deleteName" -->
 
-<input type="text" name="name" value="set new document" >
-<input type="submit" value="set" onclick="createData();">
 
 <input type="text" name="modify" value="modify" >
 <input type="submit" value="modify" onclick="modifyData();">
 
 <input type="submit" value="delete" onclick="deleteData();" >
+
+<%@ include file ="Create.jsp" %>
 
 <table>
 <tr></tr>

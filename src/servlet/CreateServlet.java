@@ -31,12 +31,18 @@ public class CreateServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	String a ="ListServlet";
+	    response.sendRedirect(a);
+	}
+
 
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		ServletContext sce = getServletContext();
 		DBConfigFile dbProperties = (DBConfigFile) sce.getAttribute("dbProperties");
 		
@@ -44,9 +50,9 @@ public class CreateServlet extends HttpServlet {
 										dbProperties.getUrl(),
 										dbProperties.getUser(),
 										dbProperties.getPassword());
-		String nameCreate = request.getParameter("name");
+		String nameCreate = request.getParameter("create");
+		System.out.println(nameCreate);
 		db.createData(nameCreate);
-		
 	    String a ="ListServlet";
 	    response.sendRedirect(a);
 	}
