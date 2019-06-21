@@ -9,11 +9,10 @@
 <head>
 <meta charset="UTF-8">
 <title>list</title> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<!-- jQuery Modal -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 </head>
 
 
@@ -27,6 +26,7 @@ function AllChecked(){
 		 document.forms["list"].hoge[i].checked = all;
 	    }
 }
+
 function DisChecked(){
     var checks = document.forms["list"].hoge;
     var checksCount = 0;
@@ -41,32 +41,82 @@ function DisChecked(){
       }
     }
   }
-  /*
-	function modifyData(){
-	  document.getElementById('list').action="ModifyServlet";
-  }
-	*/
-	function createData(){
-	document.getElementById('list').action="CreateServlet";
-  }
+  
 	
 	function deleteData(){
 	  document.getElementById('list').action="DeleteServlet";
 }
+	function modifyData(){
+		document.getElementById('list').action="ModifyServlet";
+	  }
+	
+	function createPost(url){
+		var myForm = document.createElement("form");
+		myForm.method = "post";
+		myForm.action = url;
+		var myInput = document.createElement("input");
+		myInput.name = "name";
+		var name = document.getElementById('create').value;
+		myInput.value = name;
+		myInput.stytle = "hidden";
+		myForm.appendChild(myInput);	
+		document.body.appendChild(myForm);
+		myForm.submit();
+		document.body.removeChild(myForm);
+	}
+	function alertCheck(url){
+		var name = document.getElementById('create').value;
+		var confirmT = confirm(name);
+		var length = encodeURI(name).replace(/%../g,"*").length;
+		
+		if(confirmT != true ){
+			return false;
+		}else{
+			$('#myModal').modal('hide');
+			//return inputCheck();
+			createPost(url);
+		}
+	}
+	
+	function inputCheck(url){
+		var name = document.getElementById('create').value;
+		var length = encodeURI(name).replace(/%../g,"*").length;
+		if (length >30){
+			alert("just 30!!!");
+		}else{
+			alertCheck(url);
+		}
+	}
 </script>
 
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">create</button>
 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">create new</h4>
+            </div>
+            <div class="modal-body">
+            <input type="text"  id="create"  value="用意test123" /> 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">cancel</button>
+                <button type="button" class="btn btn-primary" onclick="inputCheck('CreateServlet');">submit</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <form method="post" id="list" name="list">
 <!-- action="DeleteServlet" name="deleteName" -->
-
 
 <input type="text" name="modify" value="modify" >
 <input type="submit" value="modify" onclick="modifyData();">
 
 <input type="submit" value="delete" onclick="deleteData();" >
 
-<%@ include file ="Create.jsp" %>
 
 <table>
 <tr></tr>

@@ -50,7 +50,7 @@ public class CreateServlet extends HttpServlet {
 										dbProperties.getUrl(),
 										dbProperties.getUser(),
 										dbProperties.getPassword());
-		String nameCreate = request.getParameter("create");
+		String nameCreate = request.getParameter("name");
 		System.out.println(nameCreate);
 		db.createData(nameCreate);
 	    String a ="ListServlet";
