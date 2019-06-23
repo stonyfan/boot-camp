@@ -33,7 +33,9 @@ public class MyDBAccess {
  
     
    public synchronized void open() throws Exception {
+	   
        Class.forName(driver);
+   
        connection = DriverManager.getConnection(url, user, password);
        statement = connection.createStatement();
    }
