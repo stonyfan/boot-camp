@@ -1,12 +1,12 @@
 package model;
 
-import java.util.Date;
+
 
 public class list {
 	private int id;
 	private String name;
-	private Date created;
-	private Date modified;
+	private String created;
+	private String modified;
 	
 	public int getId() {
 		return id;
@@ -14,15 +14,15 @@ public class list {
 	public String getName() {
 		return name;
 	}
-	public Date getCreated() {
+	public String getCreated() {
 		return created;
 	}
-	public Date getModified() {
+	public String  getModified() {
 		return modified;
 	}
 	
 	
-	public list (int id, String name,Date created,Date modified) {
+	public list (int id, String name,String created,String modified) {
 		this.id=id;
 		this.name=name;
 		this.created=created;

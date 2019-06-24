@@ -1,10 +1,10 @@
 package service;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 
@@ -68,8 +68,10 @@ public class MyDBAccess {
 			  while(rs.next()) {
 			        int id = rs.getInt("id"); 
 			        String name = rs.getString("name"); 
-			        Date created = rs.getDate("created");
-			        Date modified = rs.getDate("modified");
+			        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			        String created = sdf.format(rs.getDate("created"));
+			        String modified = sdf.format(rs.getDate("modified"));
+			        
 			        sqllist.add(new list(id,name,created,modified));
 			    }
 			 
