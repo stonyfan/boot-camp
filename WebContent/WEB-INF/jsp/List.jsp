@@ -17,14 +17,19 @@
 
 
 
-<body>
+<body style="padding: 50px;background-color: #CCCCCC">
 <script  type="text/javascript">
 function AllChecked(){
 	var allFrom =  document.forms["list"].all;
 	var all =allFrom.checked;
+	var hogeLength = document.forms["list"].hoge.length;
+	if(typeof(hogeLength) == "undefined"){document.forms["list"].hoge.checked = all;
+	}
+	else{
 	 for (var i=0; i<document.forms["list"].hoge.length; i++){
 		 document.forms["list"].hoge[i].checked = all;
 	    }
+	}
 }
 
 function DisChecked(){
@@ -186,7 +191,7 @@ function DisChecked(){
 
 <button class="btn btn-primary btn-lg" data-toggle="modal"   onclick = "modifyCheck(),getModifyName();">modify</button>
 
-<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createModal"  onclick="deleteData();">delete</button>
+<button class="btn btn-primary btn-lg" data-toggle="modal"  onclick="delConfirm();">delete</button>
 
 <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -229,17 +234,17 @@ function DisChecked(){
 
 
 
-<input type="submit" value="delete" onclick="delConfirm();" >
+
 
 <form method="post" id="list" name="list">
 <!-- action="DeleteServlet" name="deleteName" -->
-<input type="submit" value="delete" onclick="deleteData();" >
 
 
-<table>
-<tr></tr>
+<div class="table-responsive">
+<table class="table table-hover ">
 
-<tr>
+
+<tr class="active">
 	<th><input type="checkbox" name="all" onClick="AllChecked();" /></th>
 	<th>id</th>
 	<th>name</th>
@@ -249,7 +254,7 @@ function DisChecked(){
 
 <c:forEach var="article" items="${articles}">
 
-<tr>
+<tr class="info">
     <td><input type="checkbox" name="hoge" id="hoges" value="${article.id}"></td>
 	<td>${article.id}</td>
 	<td>${article.name}</td>
@@ -258,6 +263,7 @@ function DisChecked(){
 </tr>
 </c:forEach>
 </table>
+</div>
 </form>
 </body>
 </html>

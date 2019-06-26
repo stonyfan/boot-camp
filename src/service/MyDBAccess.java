@@ -70,7 +70,7 @@ public class MyDBAccess {
 			  while(rs.next()) {
 			        int id = rs.getInt("id"); 
 			        String name = rs.getString("name"); 
-			        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			        String created = sdf.format(rs.getDate("created"));
 			        String modified = sdf.format(rs.getDate("modified"));
 			        
