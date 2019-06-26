@@ -36,8 +36,8 @@ public class ServletListener implements ServletContextListener {
      */
     public void contextInitialized(ServletContextEvent sce)  { 
          // TODO Auto-generated method stub
-    	//String path = sce.getServletContext().getRealPath("/WEB-INF/db.properties");
-    	String path = sce.getServletContext().getRealPath("/WEB-INF/db-home.properties");
+    	String path = sce.getServletContext().getRealPath("/WEB-INF/db.properties");
+    	//String path = sce.getServletContext().getRealPath("/WEB-INF/db-home.properties");
     	DBConfigFile dbProperties =new DBConfigFile();
     	dbProperties.getDbProperties(path);
 		sce.getServletContext().setAttribute("dbProperties",dbProperties);

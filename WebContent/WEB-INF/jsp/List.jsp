@@ -91,7 +91,7 @@ function DisChecked(){
 	//confirm value before post
 	function alertCheck(url,name,id){
 		var nameS = name;
-		if(nullCheck(name) == false)return;
+		if(nullCheck(name) == false) return;
 		var confirmT = confirm(nameS);
 		if(confirmT != true ){
 			return false;
@@ -162,11 +162,31 @@ function DisChecked(){
 		var value = $(":checkbox:checked").parents('tr').children().eq(2).text();
 		document.getElementById('modify').value = value;
 	}
+	function delConfirm(){
+		var delName = $(":checkbox:checked").map(function(){return $(this).parents('tr').children().eq(2).text();}).get();
+		var confirmT = confirm(delName);
+		if(confirmT ==true)delAjax();
+		$('body').load('ListServlet');
+		}
+	
+	function delAjax(){	
+		$.ajax({
+			type	:"post",
+			url		:"DeleteServlet",
+			data	:$('#list').serialize(),
+			async	:true,
+		success		:function(){},
+		error		:function(){alert("fail");}
+		});
+		
+	}
 </script>
 
 <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createModal">create</button>
 
 <button class="btn btn-primary btn-lg" data-toggle="modal"   onclick = "modifyCheck(),getModifyName();">modify</button>
+
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createModal"  onclick="deleteData();">delete</button>
 
 <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -209,7 +229,7 @@ function DisChecked(){
 
 
 
-
+<input type="submit" value="delete" onclick="delConfirm();" >
 
 <form method="post" id="list" name="list">
 <!-- action="DeleteServlet" name="deleteName" -->

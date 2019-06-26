@@ -53,6 +53,8 @@ public class DeleteServlet extends HttpServlet {
 										dbProperties.getPassword());
 		
 		String[] delNames =request.getParameterValues("hoge") ;
+		//String[] delNames =request.getParameterValues("delIds") ;
+		System.out.println(delNames);
 		if(delNames!=null) db.deleteData(delNames);
 
 	    String a ="ListServlet";

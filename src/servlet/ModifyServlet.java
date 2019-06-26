@@ -50,11 +50,10 @@ public class ModifyServlet extends HttpServlet {
 										dbProperties.getUser(),
 										dbProperties.getPassword());
 		
-		String[] modifyId =request.getParameterValues("hoge");
+		String modifyId =request.getParameter("idModify");
 		if(modifyId!=null) {
-		int id =  Integer.parseInt(modifyId[0]);
-		String modifyName = request.getParameter("modify");
-		System.out.println(modifyName);
+		int id =  Integer.parseInt(modifyId);
+		String modifyName = request.getParameter("modifyName");
 		
 		db.modifyData(modifyName,id);
 		}
