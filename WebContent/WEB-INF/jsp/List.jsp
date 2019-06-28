@@ -17,7 +17,7 @@
 
 
 
-<body style="padding: 50px;background-color: #CCCCCC">
+
 <script  type="text/javascript">
 function AllChecked(){
 	var allFrom =  document.forms["list"].all;
@@ -186,7 +186,7 @@ function DisChecked(){
 		
 	}
 </script>
-
+<body style="padding: 50px;background-color: #CCCCCC">
 <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createModal">create</button>
 
 <button class="btn btn-primary btn-lg" data-toggle="modal"   onclick = "modifyCheck(),getModifyName();">modify</button>
